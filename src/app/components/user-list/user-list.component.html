@@ -1,0 +1,22 @@
+<div class="user-list">
+  <nz-layout>
+    <nz-table nzShowSizeChanger [nzData]="listDataUsers" [nzFrontPagination]="false" [nzLoading]="loading" nzSize="middle" [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event)">
+      <thead>
+        <tr>
+          <th nzColumnKey="name" [nzSortFn]="true">Name</th>
+          <th nzColumnKey="gender" [nzFilters]="filterGender" [nzFilterFn]="true">Gender</th>
+          <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+          <th nzColumnKey="thumbnail">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listDataUsers">
+          <td nzEllipsis>{{ data.name?.first || "---" | gender: data.gender }} {{ data.name?.last || "---" }}</td>
+          <td nzEllipsis>{{ data?.gender || "---" }}</td>
+          <td nzEllipsis>{{ data?.email || "---" }}</td>
+          <td nzEllipsis><img [src]="data.picture.thumbnail" alt="{{ data.name.first }} {{ data.name.last }}" /></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-layout>
+</div>
